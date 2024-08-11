@@ -1,13 +1,18 @@
 import numpy as np
 
+import sys
+sys.path.append("/Users/nh/code/rec推荐/DeepCTR")
+
 from deepctr.models import DIN
 from deepctr.feature_column import SparseFeat, VarLenSparseFeat, DenseFeat, get_feature_names
 
 
 def get_xy_fd():
-    feature_columns = [SparseFeat('user', 3, embedding_dim=10), SparseFeat(
-        'gender', 2, embedding_dim=4), SparseFeat('item_id', 3 + 1, embedding_dim=8),
-                       SparseFeat('cate_id', 2 + 1, embedding_dim=4), DenseFeat('pay_score', 1)]
+    feature_columns = [SparseFeat('user', 3, embedding_dim=10), 
+                       SparseFeat('gender', 2, embedding_dim=4), 
+                       SparseFeat('item_id', 3 + 1, embedding_dim=8),
+                       SparseFeat('cate_id', 2 + 1, embedding_dim=4), 
+                       DenseFeat('pay_score', 1)]
     feature_columns += [
         VarLenSparseFeat(SparseFeat('hist_item_id', vocabulary_size=3 + 1, embedding_dim=8, embedding_name='item_id'),
                          maxlen=4, length_name="seq_length"),

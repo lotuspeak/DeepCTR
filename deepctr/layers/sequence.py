@@ -76,8 +76,8 @@ class SequencePoolingLayer(Layer):
             uiseq_embed_list, user_behavior_length = seq_value_len_list
 
             mask = tf.sequence_mask(user_behavior_length,
-                                    self.seq_len_max, dtype=tf.float32)
-            mask = tf.transpose(mask, (0, 2, 1))
+                                    self.seq_len_max, dtype=tf.float32) # (batch_size, 1, T)
+            mask = tf.transpose(mask, (0, 2, 1))                        # ((batch_size, T, 1))
 
         embedding_size = uiseq_embed_list.shape[-1]
 
